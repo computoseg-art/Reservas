@@ -114,7 +114,33 @@ export class ReservaService {
     return remove(itemRef); // Usamos remove para borrar el nodo
   }
 
-  async procesarPago(monto: number, reserva?: Reserva) {
-    alert(`Redirigiendo a pasarela de pago por $${monto}...`);
+  // async procesarPago(monto: number, reserva?: Reserva) {
+  //   alert(`Redirigiendo a pasarela de pago por $${monto}...`);
+  // }
+
+  // Agregamos el signo "?" después de reserva para hacerlo opcional
+  async procesarPago(monto: number, reserva?: any) {
+    try {
+      const body: any = {
+        total: monto,
+        // Si hay reserva, usamos su ID y descripción, si no, es un pago general
+        id: reserva?.id || 'pago-general',
+        descripcion: reserva?.descripcion || 'Pago de Deuda Total - Agenda',
+      };
+
+      const response = await fetch('http://localhost:3000/create_preference', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+
+      const data = await response.json();
+      if (data.init_point) {
+        window.location.href = data.init_point;
+      }
+    } catch (error) {
+      console.error('Error en pago:', error);
+      alert('Error al conectar con el servidor de pagos.');
+    }
   }
 }

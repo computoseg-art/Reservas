@@ -1,0 +1,10 @@
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# Ignorar credenciales reales
+.env
+
+#node_modules
+node_modules
+
+#prueba.txt
+prueba.txt

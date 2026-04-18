@@ -16,26 +16,26 @@ export class CartService {
     {
       id: '15-1',
       nombre: 'Paquete Quince: Basic',
-      precio: 45000,
+      precio: 1,
       icono: '👑',
       categoria: '15_años',
     },
     {
       id: '15-2',
       nombre: 'Paquete Quince: Full Premium',
-      precio: 85000,
+      precio: 1,
       icono: '💎',
       categoria: '15_años',
     },
 
     // PAQUETES BODAS
-    { id: 'b-1', nombre: 'Boda: Civil & Brindis', precio: 30000, icono: '🥂', categoria: 'bodas' },
-    { id: 'b-2', nombre: 'Boda: Fiesta Completa', precio: 95000, icono: '💍', categoria: 'bodas' },
+    { id: 'b-1', nombre: 'Boda: Civil & Brindis', precio: 1, icono: '🥂', categoria: 'bodas' },
+    { id: 'b-2', nombre: 'Boda: Fiesta Completa', precio: 1, icono: '💍', categoria: 'bodas' },
 
     // SERVICIOS EXTRAS (Generales)
-    { id: 'e-1', nombre: 'Alquiler Luces Pro', precio: 5000, icono: '💡', categoria: 'extras' },
-    { id: 'e-2', nombre: 'DJ y Sonido', precio: 8500, icono: '🎧', categoria: 'extras' },
-    { id: 'e-3', nombre: 'Fotografía & Video', precio: 12000, icono: '📸', categoria: 'extras' },
+    { id: 'e-1', nombre: 'Alquiler Luces Pro', precio: 1, icono: '💡', categoria: 'extras' },
+    { id: 'e-2', nombre: 'DJ y Sonido', precio: 1, icono: '🎧', categoria: 'extras' },
+    { id: 'e-3', nombre: 'Fotografía & Video', precio: 1, icono: '📸', categoria: 'extras' },
   ]);
 
   categoriaSeleccionada = signal<string>('extras'); // Por defecto muestra extras
