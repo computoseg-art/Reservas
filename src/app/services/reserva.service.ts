@@ -1,0 +1,120 @@
+import { Injectable, computed, inject } from '@angular/core';
+import { Database, ref, set, push, listVal, remove } from '@angular/fire/database';
+import { AuthService } from './auth.service';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { Observable, map, of, catchError, switchMap } from 'rxjs';
+
+export interface Reserva {
+  id?: string;
+  usuario: string;
+  fecha: string;
+  descripcion: string;
+  tipoEvento: '15_años' | 'bodas';
+  servicios: any[];
+  total: number;
+  pagado: number;
+  estado: string;
+}
+
+@Injectable({ providedIn: 'root' })
+export class ReservaService {
+  private db = inject(Database);
+  private auth = inject(AuthService);
+
+  // --- STREAM DE DATOS ---
+  private todasLasReservas$ = this.auth.user$.pipe(
+    switchMap((u) => {
+      if (!u) return of([]);
+      // Escuchamos el nodo raíz 'reservas'
+      return (listVal(ref(this.db, 'reservas')) as Observable<any>).pipe(
+        map((data) => {
+          if (!data) return [];
+          const listaPlana: Reserva[] = [];
+
+          // Firebase listVal devuelve un array si los índices son numéricos
+          // o un objeto si son keys. Manejamos ambos casos:
+          const usuariosKeys = Object.keys(data);
+          usuariosKeys.forEach((userKey) => {
+            const nodoUsuario = data[userKey];
+            if (nodoUsuario && typeof nodoUsuario === 'object') {
+              Object.keys(nodoUsuario).forEach((resKey) => {
+                const res = nodoUsuario[resKey];
+                if (res && res.fecha) {
+                  listaPlana.push({ ...res, id: resKey });
+                }
+              });
+            }
+          });
+          return listaPlana;
+        }),
+        catchError(() => of([])),
+      );
+    }),
+  );
+
+  // Esta es la señal que el componente usará como this.rs.reservas()
+  reservas = toSignal(this.todasLasReservas$, { initialValue: [] as Reserva[] });
+
+  // --- SEÑALES COMPUTADAS ---
+
+  reservasVisibles = computed(() => {
+    const email = this.auth.usuarioLogueado();
+    const todas = this.reservas(); // Usamos la señal definida arriba
+    if (!email) return [];
+    if (this.auth.esAdmin()) return todas;
+    return todas.filter((r) => r.usuario?.toLowerCase() === email.toLowerCase());
+  });
+
+  deudaTotal = computed(() => {
+    return this.reservasVisibles().reduce((acc, res) => {
+      return acc + (res.total - (res.pagado || 0));
+    }, 0);
+  });
+
+  fechasOcupadas = computed(() => new Set(this.reservas().map((r) => r.fecha)));
+
+  // --- MÉTODOS CRUD ---
+
+  async agregar(fecha: string, desc: string, total: number, servicios: any[], tipoEvento: string) {
+    const email = this.auth.usuarioLogueado();
+    if (!email) return;
+    const userPath = email.replace(/\./g, ',');
+    const nuevaRef = push(ref(this.db, `reservas/${userPath}`));
+
+    const nuevaReserva: Reserva = {
+      id: nuevaRef.key || '',
+      fecha,
+      descripcion: desc,
+      usuario: email,
+      tipoEvento: tipoEvento as '15_años' | 'bodas',
+      servicios: servicios,
+      total: Number(total),
+      pagado: 0,
+      estado: 'pendiente',
+    };
+
+    return set(nuevaRef, nuevaReserva);
+  }
+
+  async actualizar(res: Reserva) {
+    if (!res.id || !res.usuario) return;
+    const userPath = res.usuario.replace(/\./g, ',');
+    const itemRef = ref(this.db, `reservas/${userPath}/${res.id}`);
+    return set(itemRef, {
+      ...res,
+      total: Number(res.total),
+      pagado: Number(res.pagado),
+    });
+  }
+
+  async eliminar(res: Reserva) {
+    if (!res.id || !res.usuario) return;
+    const userPath = res.usuario.replace(/\./g, ',');
+    const itemRef = ref(this.db, `reservas/${userPath}/${res.id}`);
+    return remove(itemRef); // Usamos remove para borrar el nodo
+  }
+
+  async procesarPago(monto: number, reserva?: Reserva) {
+    alert(`Redirigiendo a pasarela de pago por $${monto}...`);
+  }
+}
