@@ -1,0 +1,109 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  transition: all 0.4s ease;
+  z-index: 1000;
+  background: transparent;
+}
+
+.navbar.scrolled {
+  background: #ffffff;
+  height: 70px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #fff;
+  transition: color 0.3s;
+}
+.navbar.scrolled .brand {
+  color: #1e293b;
+}
+.accent {
+  color: #c5a059;
+}
+
+.menu-items {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+  align-items: center;
+}
+
+.menu-items a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+.navbar.scrolled .menu-items a {
+  color: #64748b;
+}
+.navbar.scrolled .menu-items a:hover {
+  color: #c5a059;
+}
+
+.btn-cta {
+  background: #c5a059;
+  color: #fff !important;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+/* Estilo para el enlace de la página donde el usuario está parado */
+.active-link {
+  color: #c5a059 !important; /* Color dorado para resaltar */
+  font-weight: 700 !important;
+  border-bottom: 2px solid #c5a059;
+}
+
+/* Estilo para el botón de validación / login */
+.btn-validate {
+  background: #1e293b;
+  color: #ffffff !important;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.btn-validate:hover {
+  background: #4f46e5; /* Color primario de tu global.css */
+}
+
+/* Aseguramos que los enlaces no tengan el subrayado por defecto */
+.menu-items a {
+  text-decoration: none;
+  padding: 5px 0;
+  transition: all 0.3s ease;
+}
+
+/* Ajuste responsive para el botón en móviles */
+@media (max-width: 768px) {
+  .menu-items {
+    /* ... tus estilos anteriores de menú móvil ... */
+  }
+
+  .nav-cta {
+    margin-top: 20px;
+    padding-left: 0;
+  }
+}

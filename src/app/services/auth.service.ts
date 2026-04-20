@@ -32,7 +32,7 @@ export class AuthService {
   async login(email: string, pass: string) {
     try {
       await signInWithEmailAndPassword(this.auth, email, pass);
-      this.zone.run(() => this.router.navigate(['/agenda']));
+      this.zone.run(() => this.router.navigate(['/home']));
     } catch (e: any) {
       alert('Error en login: ' + e.message);
     }
@@ -41,7 +41,7 @@ export class AuthService {
   async registrar(email: string, pass: string) {
     try {
       await createUserWithEmailAndPassword(this.auth, email, pass);
-      this.zone.run(() => this.router.navigate(['/agenda']));
+      this.zone.run(() => this.router.navigate(['/home']));
     } catch (e: any) {
       alert('Error al registrar: ' + e.message);
       throw e;
@@ -50,6 +50,6 @@ export class AuthService {
 
   async logout() {
     await signOut(this.auth);
-    this.zone.run(() => this.router.navigate(['/home']));
+    this.zone.run(() => this.router.navigate(['/validate']));
   }
 }

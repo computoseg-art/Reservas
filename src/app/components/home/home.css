@@ -1,42 +1,134 @@
-.login-container {
+.hero {
+  height: 100vh;
+  width: 100%;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+    url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2070') center/cover;
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 70vh;
+  justify-content: center;
 }
 
-.login-card {
-  background: white;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+.hero-content {
   text-align: center;
-  width: 100%;
-  max-width: 350px;
-}
-
-.login-input {
-  width: 100%;
-  padding: 10px;
-  margin: 15px 0;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-}
-
-.btn-primary {
-  width: 100%;
-  background: #2563eb;
   color: white;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  color: white; /* Sobrescribe el azul del global */
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.btn-main {
+  background: #c5a059;
   border: none;
-  padding: 10px;
-  border-radius: 6px;
+  padding: 15px 30px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn-alt {
+  background: transparent;
+  border: 1px solid white;
+  padding: 15px 30px;
+  color: white;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-.toggle-link {
-  margin-top: 15px;
-  font-size: 0.9rem;
-  color: #2563eb;
+/* Services Grid */
+.services {
+  padding: 100px 5%;
+  background-color: #fff;
+}
+
+.section-info {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.divider {
+  width: 50px;
+  height: 3px;
+  background: #c5a059;
+  margin: 20px auto;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  height: 450px;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
   cursor: pointer;
-  text-decoration: underline;
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: white;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+}
+
+.card:hover .card-overlay {
+  transform: translateY(0);
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+.card .more {
+  color: #c5a059;
+  font-weight: 600;
+  margin-top: 15px;
+}
+
+.cta-bottom {
+  padding: 100px 20px;
+  background-color: #121212;
+  color: white;
+  text-align: center;
+}
+
+.cta-container h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.cta-container p {
+  margin-bottom: 2rem;
+  opacity: 0.8;
+  font-size: 1.1rem;
 }

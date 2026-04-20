@@ -18,20 +18,9 @@ body {
   background-color: var(--bg-color);
   color: var(--text-main);
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-
-/* Contenedor principal para tus rutas */
-main {
+  /* Eliminamos display: flex, justify-content y align-items */
   width: 100%;
-  max-width: 500px;
-  padding: 2rem;
-  background: var(--card-bg);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
+  min-height: 100vh;
 }
 
 h1 {

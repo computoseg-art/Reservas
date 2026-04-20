@@ -1,43 +1,43 @@
-<div class="login-container">
-  <div class="login-card">
-    <h2>{{ esRegistro() ? 'Crear Cuenta' : 'Iniciar Sesión' }}</h2>
+<div class="home-wrapper">
+  <header class="hero">
+    <div class="hero-content">
+      <h1 class="fade-in">Capturando Historias, <br />Creando Legados.</h1>
+      <p>Fotografía profesional de bodas y eventos sociales en Uruguay.</p>
 
-    <div class="form-group">
-      <label>Correo Electrónico</label>
-      <input
-        type="email"
-        [ngModel]="nombreUsuario()"
-        (input)="nombreUsuario.set($any($event.target).value)"
-        placeholder="ejemplo@correo.com"
-        class="login-input"
-      />
+      <div class="hero-actions">
+        <button class="btn-main" routerLink="/contacto">Consultar Disponibilidad</button>
+        <button class="btn-alt" routerLink="/agenda">Mi Agenda</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="services">
+    <div class="section-info">
+      <span class="subtitle">Especialidades</span>
+      <h2>Nuestros Servicios</h2>
+      <div class="divider"></div>
     </div>
 
-    <div class="form-group">
-      <label>Contraseña</label>
-      <input
-        type="password"
-        [ngModel]="passwordUsuario()"
-        (input)="passwordUsuario.set($any($event.target).value)"
-        placeholder="Mínimo 6 caracteres"
-        class="login-input"
-      />
+    <div class="service-grid">
+      @for (item of services; track item.id) {
+        <div class="card" [style.background-image]="'url(' + item.img + ')'">
+          <div class="card-overlay">
+            <div class="card-text">
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.desc }}</p>
+            </div>
+            <a routerLink="/contacto" class="more">Pedir Presupuesto —</a>
+          </div>
+        </div>
+      }
     </div>
+  </section>
 
-    <button
-      (click)="accionPrincipal()"
-      class="btn-primary"
-      [disabled]="nombreUsuario().trim().length === 0 || passwordUsuario().trim().length < 6"
-    >
-      {{ esRegistro() ? 'Registrarse Ahora' : 'Entrar' }}
-    </button>
-
-    <p (click)="esRegistro.set(!esRegistro())" class="toggle-link">
-      {{
-        esRegistro()
-          ? '¿Ya tienes cuenta? Inicia sesión aquí'
-          : '¿No tienes cuenta? Regístrate gratis'
-      }}
-    </p>
-  </div>
+  <section class="cta-bottom">
+    <div class="cta-container">
+      <h2>¿Tenés una fecha especial en mente?</h2>
+      <p>No dejes que los recuerdos se borren. Asegurá tu fecha hoy mismo.</p>
+      <button class="btn-main" routerLink="/contacto">Contactar Ahora</button>
+    </div>
+  </section>
 </div>
