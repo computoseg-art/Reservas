@@ -123,16 +123,19 @@ export class ReservaService {
     try {
       const body: any = {
         total: monto,
-        // Si hay reserva, usamos su ID y descripción, si no, es un pago general
         id: reserva?.id || 'pago-general',
         descripcion: reserva?.descripcion || 'Pago de Deuda Total - Agenda',
       };
 
-      const response = await fetch('http://localhost:3000/create_preference', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
+      // CAMBIA ESTA LÍNEA:
+      const response = await fetch(
+        'https://event-planner-pro-production.up.railway.app/create_preference',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        },
+      );
 
       const data = await response.json();
       if (data.init_point) {

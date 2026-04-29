@@ -1,7 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
-  <div class="container-fluid">
-    <a class="navbar-brand fw-bold" routerLink="/home">Servicios BS</a>
-
+<nav
+  class="navbar navbar-expand-lg navbar-dark fixed-top transition-all"
+  [ngClass]="{ 'navbar-scrolled': isScrolled, 'bg-transparent': !isScrolled }"
+>
+  <div class="container">
     <button
       class="navbar-toggler"
       type="button"
@@ -12,43 +13,33 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto align-items-center">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/home" routerLinkActive="active">Inicio</a>
+      <ul class="navbar-nav ms-auto align-items-center menu-items">
+        <li class="nav-item d-flex align-items-center">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active-link">Inicio</a>
         </li>
 
         @if (authService.userSignal()) {
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/agenda" routerLinkActive="active">📅 Mi Agenda</a>
+          <li class="nav-item d-flex align-items-center">
+            <a class="nav-link" routerLink="/agenda" routerLinkActive="active-link">📅 Mi Agenda</a>
           </li>
         }
 
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/contacto" routerLinkActive="active">Contacto</a>
+        <li class="nav-item d-flex align-items-center">
+          <a class="nav-link" routerLink="/contacto" routerLinkActive="active-link">Contacto</a>
         </li>
 
-        <li class="nav-item ms-lg-3">
+        <li class="nav-item ms-lg-4 d-flex align-items-center">
           @if (!authService.userSignal()) {
-            <a
-              class="btn btn-outline-light btn-sm px-3"
-              routerLink="/login"
-              routerLinkActive="active"
-            >
-              Ingresar
-            </a>
+            <a class="btn-cta text-decoration-none" routerLink="/login"> Ingresar </a>
           } @else {
-            <div
-              class="d-flex align-items-center gap-3 bg-dark bg-opacity-10 p-2 rounded-pill px-3"
-            >
-              <span class="navbar-text text-white small d-none d-md-inline mb-0">
+            <div class="user-pill d-flex align-items-center gap-3">
+              <span class="user-name d-none d-md-inline mb-0">
                 {{ authService.usuarioLogueado() }}
                 @if (authService.esAdmin()) {
-                  <span class="badge bg-warning text-dark ms-1">Admin</span>
+                  <span class="badge-admin">Admin</span>
                 }
               </span>
-              <button class="btn btn-light btn-sm fw-bold shadow-sm" (click)="onLogout()">
-                Salir
-              </button>
+              <button class="btn-logout" (click)="onLogout()">Salir</button>
             </div>
           }
         </li>

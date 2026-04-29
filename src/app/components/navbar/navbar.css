@@ -1,110 +1,205 @@
+/* =========================================
+   NAVBAR PREMIUM - SERVICIOS BS
+   ========================================= */
+
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 80px;
+  background-color: black !important;
+  height: 85px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
   display: flex;
   align-items: center;
-  transition: all 0.4s ease;
-  z-index: 1000;
-  background: transparent;
-  background-color: black;
 }
 
-.navbar.scrolled {
-  background: #ffffff;
-  height: 70px;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+/* Estado al hacer Scroll */
+.navbar-scrolled {
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  height: 75px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.nav-container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
+/* Tipografía Brand */
 .brand {
   font-weight: 800;
   letter-spacing: 2px;
   color: #fff;
-  transition: color 0.3s;
-}
-.navbar.scrolled .brand {
-  color: #1e293b;
-}
-.accent {
-  color: #c5a059;
-}
-
-.menu-items {
+  font-size: 1.5rem;
   display: flex;
-  list-style: none;
-  gap: 30px;
   align-items: center;
 }
 
-.menu-items a {
-  text-decoration: none;
-  color: #fff;
+.navbar-scrolled .brand {
+  color: #3f3624 !important; /* Café oscuro */
+}
+
+.accent {
+  color: #c5a059; /* Dorado */
+}
+
+/* =========================================
+   ENLACES DEL MENÚ (CORRECCIÓN DE ALINEACIÓN)
+   ========================================= */
+
+.menu-items {
+  display: flex;
+  align-items: center !important;
+  margin-bottom: 0;
+  height: 100%;
+}
+
+.menu-items .nav-item {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.menu-items .nav-link {
+  color: rgba(255, 255, 255, 0.85) !important;
   font-size: 0.85rem;
   font-weight: 600;
   text-transform: uppercase;
-  transition: color 0.3s;
+  letter-spacing: 1px;
+  margin: 0 12px;
+  padding: 0 !important; /* Eliminamos el padding de Bootstrap que desalinea */
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  height: 42px; /* Altura idéntica al user-pill */
+  line-height: 1;
 }
 
-.navbar.scrolled .menu-items a {
-  color: #64748b;
-}
-.navbar.scrolled .menu-items a:hover {
-  color: #c5a059;
+.navbar-scrolled .menu-items .nav-link {
+  color: #64748b !important;
 }
 
-.btn-cta {
-  background: #c5a059;
-  color: #fff !important;
-  padding: 10px 20px;
-  border-radius: 4px;
-}
-
-/* Estilo para el enlace de la página donde el usuario está parado */
+/* Link Activo */
 .active-link {
-  color: #c5a059 !important; /* Color dorado para resaltar */
-  font-weight: 700 !important;
+  color: #c5a059 !important;
   border-bottom: 2px solid #c5a059;
 }
 
-/* Estilo para el botón de validación / login */
-.btn-validate {
-  background: #1e293b;
-  color: #ffffff !important;
-  padding: 8px 16px;
-  border-radius: 8px;
-  transition: background 0.3s ease;
+/* =========================================
+   BOTONES Y COMPONENTE DE USUARIO
+   ========================================= */
+
+/* Botón Ingresar (CTA) */
+.btn-cta {
+  background: #c5a059;
+  color: #fff !important;
+  padding: 10px 25px;
+  border-radius: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  height: 42px;
+  transition: all 0.2s;
 }
 
-.btn-validate:hover {
-  background: #4f46e5; /* Color primario de tu global.css */
+.btn-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);
 }
 
-/* Aseguramos que los enlaces no tengan el subrayado por defecto */
-.menu-items a {
-  text-decoration: none;
-  padding: 5px 0;
-  transition: all 0.3s ease;
+/* Contenedor de Usuario (Pill) */
+.user-pill {
+  background: rgba(197, 160, 89, 0.15);
+  padding: 0 18px;
+  border-radius: 50px;
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 42px; /* Nivelado con los links */
 }
 
-/* Ajuste responsive para el botón en móviles */
-@media (max-width: 768px) {
-  .menu-items {
-    /* ... tus estilos anteriores de menú móvil ... */
+.navbar-scrolled .user-pill {
+  background: #fdfaf5;
+  border-color: #c5a059;
+}
+
+.user-name {
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.navbar-scrolled .user-name {
+  color: #3f3624;
+}
+
+.badge-admin {
+  background: #c5a059;
+  color: #fff;
+  font-size: 0.6rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+/* Botón Salir */
+.btn-logout {
+  background: #fff;
+  border: none;
+  color: #3f3624;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  cursor: pointer;
+  height: 28px;
+  display: flex;
+  align-items: center;
+}
+
+.btn-logout:hover {
+  background: #3f3624;
+  color: #c5a059;
+}
+
+/* =========================================
+   RESPONSIVO (MÓVIL)
+   ========================================= */
+@media (max-width: 991px) {
+  .navbar {
+    background: #3f3624 !important;
+    height: auto;
+    padding: 15px 0;
   }
 
-  .nav-cta {
-    margin-top: 20px;
-    padding-left: 0;
+  .navbar-collapse {
+    background: #3f3624;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 15px;
+    border: 1px solid rgba(197, 160, 89, 0.2);
+  }
+
+  .menu-items {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 10px;
+  }
+
+  .menu-items .nav-link {
+    width: 100%;
+    padding: 10px 0 !important;
+  }
+
+  .user-pill {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 15px;
+    padding: 10px 20px;
+    height: auto;
   }
 }

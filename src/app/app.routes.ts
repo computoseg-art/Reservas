@@ -9,7 +9,8 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'contacto', component: ContactoComponent },
   { path: 'agenda', component: AgendaComponent, canActivate: [authGuard] },
-  { path: 'validate', component: Usersvalidate },
+  // CAMBIÁ ESTA LÍNEA:
+  { path: 'login', component: Usersvalidate },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' },
 ];

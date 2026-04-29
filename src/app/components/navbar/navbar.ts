@@ -21,8 +21,14 @@ export class Navbar {
 
   isScrolled = false;
 
+  // @HostListener('window:scroll', [])
+  // onWindowScroll() {
+  //   this.isScrolled = window.scrollY > 50;
+  // }
+
   @HostListener('window:scroll', [])
   onWindowScroll() {
+    // Cambia a los 50px de scroll
     this.isScrolled = window.scrollY > 50;
   }
 
