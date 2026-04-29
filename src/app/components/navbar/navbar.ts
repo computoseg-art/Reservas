@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'; // Para @for, @if, etc.
-import { RouterLink, RouterLinkActive } from '@angular/router'; // <--- ESTO ES LO QUE FALTA
+import { RouterModule, RouterLink, RouterLinkActive } from '@angular/router'; // <--- ESTO ES LO QUE FALTA
 import { Component, inject, HostListener } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
@@ -10,6 +10,7 @@ import { AuthService } from '../../services/auth.service';
     CommonModule,
     RouterLink, // Importante para [routerLink]
     RouterLinkActive, // Importante para [routerLinkActive]
+    RouterModule,
   ],
   templateUrl: './navbar.html',
   styleUrls: ['./navbar.css'],

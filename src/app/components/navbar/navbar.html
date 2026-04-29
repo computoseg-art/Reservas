@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark shadow">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
   <div class="container-fluid">
     <a class="navbar-brand fw-bold" routerLink="/home">Servicios BS</a>
 
@@ -17,32 +17,40 @@
           <a class="nav-link" routerLink="/home" routerLinkActive="active">Inicio</a>
         </li>
 
-        <li class="nav-item" *ngIf="authService.userSignal()">
-          <a class="nav-link" routerLink="/agenda" routerLinkActive="active">📅 Mi Agenda</a>
-        </li>
+        @if (authService.userSignal()) {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/agenda" routerLinkActive="active">📅 Mi Agenda</a>
+          </li>
+        }
 
         <li class="nav-item">
           <a class="nav-link" routerLink="/contacto" routerLinkActive="active">Contacto</a>
         </li>
 
         <li class="nav-item ms-lg-3">
-          <a
-            *ngIf="!authService.userSignal()"
-            class="btn btn-outline-light btn-sm"
-            routerLink="/login"
-          >
-            Ingresar
-          </a>
-
-          <div *ngIf="authService.userSignal()" class="d-flex align-items-center gap-3">
-            <span class="navbar-text text-white small d-none d-md-inline">
-              {{ authService.usuarioLogueado() }}
-              <span *ngIf="authService.esAdmin()" class="badge bg-warning text-dark ms-1"
-                >Admin</span
-              >
-            </span>
-            <button class="btn btn-light btn-sm" (click)="onLogout()">Salir</button>
-          </div>
+          @if (!authService.userSignal()) {
+            <a
+              class="btn btn-outline-light btn-sm px-3"
+              routerLink="/login"
+              routerLinkActive="active"
+            >
+              Ingresar
+            </a>
+          } @else {
+            <div
+              class="d-flex align-items-center gap-3 bg-dark bg-opacity-10 p-2 rounded-pill px-3"
+            >
+              <span class="navbar-text text-white small d-none d-md-inline mb-0">
+                {{ authService.usuarioLogueado() }}
+                @if (authService.esAdmin()) {
+                  <span class="badge bg-warning text-dark ms-1">Admin</span>
+                }
+              </span>
+              <button class="btn btn-light btn-sm fw-bold shadow-sm" (click)="onLogout()">
+                Salir
+              </button>
+            </div>
+          }
         </li>
       </ul>
     </div>
